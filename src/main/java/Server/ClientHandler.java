@@ -1,13 +1,15 @@
 package Server;
 
 import Server.Server;
+import connectionUtils.Connection;
+import connectionUtils.ConnectionListener;
 import messageUtils.Message;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ClientHandler implements Runnable{
+public class ClientHandler implements Runnable, Connection {
     private Server server;
     private Message outMessage; // исходящее сообщение
     private Scanner inMessage;
@@ -34,8 +36,8 @@ public class ClientHandler implements Runnable{
     public void run() {
         try{
            while (true){
-               server.sendMessageToAllClients("Новый участник вошёл чат");
-               server.sendMessageToAllClients("Клиентов в чате: " + clientCount);
+               server.sendMessage();//"Новый участник вошёл чат"
+               server.sendMessage();//"Клиентов в чате: " + clientCount
                break;
            }
 
@@ -46,7 +48,7 @@ public class ClientHandler implements Runnable{
 
                    System.out.println(clientMessage);
 
-                   server.sendMessageToAllClients(clientMessage);
+                   server.sendMessage();
                }
 
                Thread.sleep(100);
@@ -59,15 +61,13 @@ public class ClientHandler implements Runnable{
         }
     }
 
-
-    //TODO реализовать метод
-    // отправляем сообщение
-    public void sendMsg(String msg){
+    @Override
+    public void send(Message message) {
 
     }
 
     public void close(){
-        server.removeClient(this);
+        server.connectionClosed(this);
         clientCount--;
 
     }
