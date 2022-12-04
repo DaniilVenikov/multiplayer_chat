@@ -1,11 +1,8 @@
-package Server;
+package server;
 
-import Server.Server;
 import connectionUtils.Connection;
-import connectionUtils.ConnectionListener;
 import messageUtils.Message;
 
-import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -36,8 +33,8 @@ public class ClientHandler implements Runnable, Connection {
     public void run() {
         try{
            while (true){
-               server.sendMessage();//"Новый участник вошёл чат"
-               server.sendMessage();//"Клиентов в чате: " + clientCount
+               //server.sendMessage();//"Новый участник вошёл чат"
+               //server.sendMessage();//"Клиентов в чате: " + clientCount
                break;
            }
 
@@ -48,7 +45,7 @@ public class ClientHandler implements Runnable, Connection {
 
                    System.out.println(clientMessage);
 
-                   server.sendMessage();
+                   //server.sendMessage();
                }
 
                Thread.sleep(100);

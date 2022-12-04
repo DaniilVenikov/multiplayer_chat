@@ -1,4 +1,4 @@
-package Server;
+package server;
 
 import configuration.FileSystemServerConfigurator;
 import configuration.ServerConfiguration;
@@ -20,7 +20,7 @@ import java.util.Set;
 
 public class Server implements ConnectionListener {
 
-    private final String HOST;
+
     private final int PORT;
 
     ServerSocket serverSocket;
@@ -32,7 +32,6 @@ public class Server implements ConnectionListener {
         ServerConfiguration configuration =
                 serverConfigurator.loadConfiguration(URI.create("file:/Users/daniil/IdeaProjects/chat/src/main/resources/settings.txt"));
 
-        HOST = configuration.getHost();
         PORT = configuration.getPort();
         connections = new HashSet<>();
         try {
@@ -50,6 +49,7 @@ public class Server implements ConnectionListener {
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
                 connectionCreated(new ConnectionImpl(clientSocket, this));
+
 
             } catch (IOException e){
                 e.printStackTrace();
