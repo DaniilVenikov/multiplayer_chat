@@ -29,4 +29,14 @@ public class MessageImpl implements Message {
     public Date getTime() {
         return time;
     }
+
+
+    @Override
+    public String toString() {
+        return "MessageImpl{" +
+                "nick='" + nick + '\'' +
+                ", content='" + content + '\'' +
+                ", time=" + time +
+                '}';
+    }
 }
